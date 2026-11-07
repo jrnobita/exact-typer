@@ -1,0 +1,6 @@
+{
+  "name": "exact-typer-tests",
+  "private": true,
+  "scripts": { "fuzz": "node fuzz.test.js", "e2e": "node e2e.test.js" },
+  "devDependencies": { "puppeteer": "24.10.0" }
+}

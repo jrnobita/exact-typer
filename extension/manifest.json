@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Exact Typer",
+  "version": "1.1.0",
+  "description": "Types your text into the current tab exactly as written, at the speed you set, with optional human-like typos, revisions and pauses.",
+  "permissions": ["debugger", "storage", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js" },
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "action": {
+    "default_title": "Exact Typer",
+    "default_popup": "popup.html",
+    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }
+  }
+}

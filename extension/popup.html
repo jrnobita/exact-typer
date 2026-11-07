@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root { --ink:#1f2328; --muted:#6b7280; --line:#d8dce1; --bg:#fbfaf7; --accent:#15803d; --stop:#b91c1c; --pause:#a16207; }
+  * { box-sizing: border-box; }
+  body { margin:0; width:370px; padding:14px; background:var(--bg); color:var(--ink);
+         font:13px/1.4 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; }
+  h1 { font-size:14px; margin:0 0 10px; }
+  h2 { font-size:12px; margin:14px 0 2px; color:var(--muted); font-weight:600; text-transform:none; }
+  textarea { width:100%; height:140px; resize:vertical; padding:8px; border:1px solid var(--line);
+             border-radius:6px; font:12px/1.45 ui-monospace, Menlo, Consolas, monospace; background:#fff; color:var(--ink); tab-size:4; }
+  .row { display:flex; align-items:center; gap:8px; margin-top:8px; }
+  .row label { width:76px; color:var(--muted); }
+  .row input[type=range] { flex:1; }
+  .row output { width:96px; text-align:right; font-variant-numeric:tabular-nums; font-size:12px; }
+  .check { display:flex; gap:6px; align-items:flex-start; margin-top:8px; color:var(--ink); font-size:12px; }
+  .check input { margin-top:2px; }
+  .check small { color:var(--muted); display:block; }
+  .meta { margin-top:6px; color:var(--muted); font-size:12px; }
+  .btns { display:flex; gap:8px; margin-top:12px; }
+  button { flex:1; padding:9px; border:0; border-radius:6px; font-weight:600;
+           font-size:13px; color:#fff; background:var(--accent); cursor:pointer; }
+  button.stop { background:var(--stop); }
+  button.pause { background:var(--pause); }
+  button[hidden] { display:none; }
+  button:disabled { opacity:.6; cursor:default; }
+  #status { margin-top:8px; min-height:18px; font-size:12px; }
+  .err { color:var(--stop); }
+  details { margin-top:8px; color:var(--muted); font-size:12px; }
+  details ul { margin:6px 0 0; padding-left:18px; }
+</style>
+</head>
+<body>
+  <h1>Exact Typer</h1>
+  <textarea id="text" placeholder="Paste or write the text to type. Line breaks and tabs are kept." spellcheck="false"></textarea>
+  <div class="meta" id="count">0 characters</div>
+
+  <div class="row"><label for="wpm">Speed</label><input id="wpm" type="range" min="10" max="400" step="5" value="60"><output id="wpmOut"></output></div>
+  <div class="row"><label for="jitter">Variation</label><input id="jitter" type="range" min="0" max="50" step="5" value="20"><output id="jitterOut"></output></div>
+  <div class="row"><label for="countdown">Countdown</label><input id="countdown" type="range" min="1" max="10" step="1" value="3"><output id="countdownOut"></output></div>
+
+  <h2>Look human (the final text is still exact)</h2>
+  <div class="row"><label for="typos">Typos</label><input id="typos" type="range" min="0" max="10" step="1" value="0"><output id="typosOut"></output></div>
+  <div class="row"><label for="revisions">Revisions</label><input id="revisions" type="range" min="0" max="10" step="1" value="0"><output id="revisionsOut"></output></div>
+  <div class="row"><label for="pauses">Thinking</label><input id="pauses" type="range" min="0" max="10" step="1" value="0"><output id="pausesOut"></output></div>
+  <label class="check"><input id="goBack" type="checkbox" checked>
+    <span>Go back to fix earlier sentences
+      <small>Uses the arrow keys to jump back a few sentences, fix a word, then jump to the end again.</small></span></label>
+  <div class="meta" id="eta"></div>
+
+  <div class="btns">
+    <button id="go">Start</button>
+    <button id="pause" class="pause" hidden>Pause</button>
+  </div>
+  <div id="status"></div>
+
+  <details>
+    <summary>How it works</summary>
+    <ul>
+      <li>Press Start, then click where the text should go before the countdown ends.</li>
+      <li>Typing stays inside this tab, even if you switch tabs or apps.</li>
+      <li>Pause waits for a safe moment (never in the middle of a fix). Don't edit the page while paused. Resume gives you the countdown again: if you clicked somewhere else, click right after the last typed character.</li>
+      <li>Stop: press Esc, press Stop here, or press Cancel on Chrome's yellow banner.</li>
+      <li>Google Docs: turn off everything automatic in Tools &gt; Preferences (smart quotes, auto-capitalize, lists, links, substitutions, spelling autocorrect, Smart Compose) so the text stays exact.</li>
+    </ul>
+  </details>
+<script src="planner.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
