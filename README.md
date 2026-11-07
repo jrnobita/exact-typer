@@ -53,7 +53,8 @@ Then, in the Chrome tab that opens:
 
 - **Double-click installers** are on the
   [Releases page](https://github.com/jrnobita/exact-typer/releases/latest):
-  `Install Exact Typer (Mac).command` and `Install Exact Typer (Windows).bat`.
+  `Install-Exact-Typer-Mac.zip` (unzip it, then double-click
+  `Install Exact Typer (Mac).command`) and `Install-Exact-Typer-Windows.bat`.
   They run the same commands as above. Because they are not signed, the
   computer warns you first: on a Mac, right-click the file and choose **Open**
   (or allow it in System Settings > Privacy & Security); on Windows, click
